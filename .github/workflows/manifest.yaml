@@ -1,0 +1,49 @@
+name: manifest
+
+on:
+  workflow_call:
+    inputs:
+      kustomization:
+        description: glob patterns to kustomization.yaml
+        type: string
+        default: |
+          config/default/kustomization.yaml
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: int128/hide-comment-action@v1
+        with:
+          ends-with: |
+            <!-- kustomize-action -->
+            <!-- diff-action -->
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          path: head
+      - uses: int128/kustomize-action@v1
+        id: kustomize-head
+        with:
+          base-directory: head
+          kustomization: ${{ inputs.kustomization }}
+          write-individual-files: true
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.base_ref }}
+          path: base
+      - uses: int128/kustomize-action@v1
+        id: kustomize-base
+        with:
+          base-directory: base
+          kustomization: ${{ inputs.kustomization }}
+          write-individual-files: true
+          ignore-kustomize-error: true
+
+      - uses: int128/diff-action@v1
+        with:
+          base: ${{ steps.kustomize-base.outputs.directory }}
+          head: ${{ steps.kustomize-head.outputs.directory }}
