@@ -13,6 +13,7 @@ on:
       - .github/workflows/go.yaml
       - go.*
       - '**/*.go'
+      - Makefile
   push:
     branches:
       - main
@@ -20,6 +21,7 @@ on:
       - .github/workflows/go.yaml
       - go.*
       - '**/*.go'
+      - Makefile
 
 jobs:
   go:
@@ -34,8 +36,6 @@ name: manifest
 
 on:
   pull_request:
-    branches:
-      - main
     paths:
       - config/**
       - .github/workflows/manifest.yaml
