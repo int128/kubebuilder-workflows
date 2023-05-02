@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: ${{ inputs.go-version }}
-          cache: true
+          cache: false # by golangci-lint-action
       - uses: golangci/golangci-lint-action@v3
         with:
           version: ${{ inputs.golangci-lint-version }}
@@ -35,7 +35,6 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: ${{ inputs.go-version }}
-          cache: true
       - run: go mod tidy
       - run: make fmt
       - run: make generate manifests
@@ -49,5 +48,4 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: ${{ inputs.go-version }}
-          cache: true
       - run: make test
