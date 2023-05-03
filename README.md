@@ -1,4 +1,4 @@
-# kubebuilder-workflows [![test](https://github.com/int128/kubebuilder-workflows/actions/workflows/test.yaml/badge.svg)](https://github.com/int128/kubebuilder-workflows/actions/workflows/test.yaml)
+# kubebuilder-workflows [![test](https://github.com/int128/kubebuilder-workflows/actions/workflows/test-workflows.yaml/badge.svg)](https://github.com/int128/kubebuilder-workflows/actions/workflows/test-workflows.yaml)
 
 This provides the reusable workflows for a Kubebuilder project.
 
