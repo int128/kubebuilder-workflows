@@ -26,8 +26,7 @@ jobs:
         with:
           go-version: ${{ inputs.go-version }}
           go-version-file: ${{ inputs.go-version-file }}
-          cache: false # by golangci-lint-action
-      - uses: golangci/golangci-lint-action@v4
+      - uses: golangci/golangci-lint-action@v5
         with:
           version: ${{ inputs.golangci-lint-version }}
           args: --timeout=3m
