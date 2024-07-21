@@ -40,7 +40,7 @@ jobs:
           write-individual-files: true
           ignore-kustomize-error: true
 
-      - uses: int128/diff-action@d379b5cc2963ecbd33980121917ebf6490ce431e # v1.39.0
+      - uses: int128/diff-action@915c60aa5cb5c973f5f39d1e59cff13bc1fa3c6e # v1.40.0
         with:
           base: ${{ steps.kustomize-base.outputs.directory }}
           head: ${{ steps.kustomize-head.outputs.directory }}
