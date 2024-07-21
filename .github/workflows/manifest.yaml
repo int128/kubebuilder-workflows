@@ -17,28 +17,28 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: int128/hide-comment-action@v1
+      - uses: int128/hide-comment-action@850168a162175291c7f4e75f8a223fb4d23402a2 # v1.31.0
         with:
           ends-with: |
             <!-- kustomize-action -->
             <!-- diff-action -->
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           ref: ${{ github.head_ref }}
           path: head
-      - uses: int128/kustomize-action@v1
+      - uses: int128/kustomize-action@f6512e9e0f769e7cda7fafc245bfa6ca79929509 # v1.61.0
         id: kustomize-head
         with:
           base-directory: head
           kustomization: ${{ inputs.kustomization }}
           write-individual-files: true
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           ref: ${{ github.base_ref }}
           path: base
-      - uses: int128/kustomize-action@v1
+      - uses: int128/kustomize-action@f6512e9e0f769e7cda7fafc245bfa6ca79929509 # v1.61.0
         id: kustomize-base
         with:
           base-directory: base
@@ -46,7 +46,7 @@ jobs:
           write-individual-files: true
           ignore-kustomize-error: true
 
-      - uses: int128/diff-action@v1
+      - uses: int128/diff-action@020dfd981b8488011507bc5ba20c7337a0bc980f # v1.38.0
         with:
           base: ${{ steps.kustomize-base.outputs.directory }}
           head: ${{ steps.kustomize-head.outputs.directory }}
