@@ -9,3 +9,6 @@ namespace: kubebuilder-updates-system
 # Note that it should also match with the prefix (text before '-') of the namespace
 # field above.
 namePrefix: kubebuilder-updates-
+
+resources:
+- ../manager
