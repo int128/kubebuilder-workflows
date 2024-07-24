@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       controller-image:
-        description: Controller image URI
+        description: Image URI of the controller
         type: string
         default: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
 
