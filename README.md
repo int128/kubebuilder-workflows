@@ -26,6 +26,9 @@ on:
 jobs:
   go:
     uses: int128/kubebuilder-workflows/.github/workflows/go.yaml@v1
+    permissions:
+      contents: write
+      pull-requests: write
     with:
       go-version: 1.20.3
       golangci-lint-version: v1.52.2
@@ -43,4 +46,26 @@ on:
 jobs:
   manifest:
     uses: int128/kubebuilder-workflows/.github/workflows/manifest.yaml@v1
+    permissions:
+      contents: read
+      pull-requests: write
+```
+
+```yaml
+name: release
+
+on:
+  push:
+    tags:
+      - v*
+  pull_request:
+    paths:
+      - config/**
+      - .github/workflows/release.yaml
+
+jobs:
+  manifest:
+    uses: int128/kubebuilder-workflows/.github/workflows/release.yaml@v1
+    permissions:
+      contents: write
 ```
