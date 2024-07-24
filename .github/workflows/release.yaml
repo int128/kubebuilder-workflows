@@ -1,0 +1,31 @@
+name: release
+
+on:
+  workflow_call:
+    inputs:
+      controller-image:
+        description: Controller image URI
+        type: string
+        default: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - run: kustomize edit set image controller="$controller_image"
+        working-directory: config/manager
+        env:
+          controller_image: ${{ inputs.controller-image }}
+
+      - run: kustomize build config/default > "${RUNNER_TEMP}/${GITHUB_REPOSITORY##*/}.yaml"
+      - run: cat "${RUNNER_TEMP}/${GITHUB_REPOSITORY##*/}.yaml"
+
+      - if: github.ref_type == 'tag'
+        run: gh release upload "$GITHUB_REF_NAME" "${RUNNER_TEMP}/${GITHUB_REPOSITORY##*/}.yaml" --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
