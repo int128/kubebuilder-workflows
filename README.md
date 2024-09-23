@@ -30,7 +30,8 @@ jobs:
       contents: write
       pull-requests: write
     with:
-      go-version: 1.20.3
+      go-version-file: go.sum
+      cache-dependency-path: go.sum
       golangci-lint-version: v1.52.2
 ```
 
