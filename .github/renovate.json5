@@ -6,4 +6,11 @@
     "github>int128/go-renovate-config:github-actions#v1.5.0",
     "helpers:pinGitHubActionDigests",
   ],
+  packageRules: [
+    {
+      "description": "Update go version in go.mod",
+      "matchDatasources": ["golang-version"],
+      "rangeStrategy": "bump",
+    },
+  ],
 }
