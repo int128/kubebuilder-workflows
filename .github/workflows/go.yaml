@@ -11,8 +11,8 @@ on:
         description: Path to go.sum
         type: string
         required: true
-      skip-lint:
-        description: Skip make lint
+      ignore-lint-error:
+        description: Ignore error of make lint
         type: boolean
         default: false
 
@@ -43,6 +43,6 @@ jobs:
         with:
           go-version-file: ${{ inputs.go-version-file }}
           cache-dependency-path: ${{ inputs.cache-dependency-path }}
-      - if: inputs.skip-lint == false
-        run: make lint
+      - run: make lint
+        continue-on-error: ${{ inputs.ignore-lint-error }}
       - run: make test
