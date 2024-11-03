@@ -32,7 +32,6 @@ jobs:
     with:
       go-version-file: go.sum
       cache-dependency-path: go.sum
-      golangci-lint-version: v1.52.2
 ```
 
 ```yaml
