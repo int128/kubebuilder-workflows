@@ -1,3 +1,3 @@
 module github.com/int128/kubebuilder-workflows
 
-go 1.24.6
+go 1.25.0
